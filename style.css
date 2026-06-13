@@ -1,52 +1,181 @@
 body{
-    background:#20262d;
-    font-family:Helvetica, Arial, sans-serif;
     margin:0;
-    padding:0;
-    color:white;
+    padding:20px;
+    background:#f2f2f7;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 h1{
+    margin:0 0 12px 0;
+    padding:24px;
     text-align:center;
-    background:linear-gradient(#3d3d3d,#1f1f1f);
-    margin:0;
-    padding:15px;
-    font-size:34px;
+    font-size:42px;
+    font-weight:700;
+    color:white;
+    background:linear-gradient(
+
+        135deg,
+
+        #4a4a4a,
+
+        #1f1f1f
+
+    );
+
+    border-radius:24px 24px 0 0;
+
 }
 
-table{
+#tabella{
     width:100%;
+    max-width:650px;
+    margin:auto;
     border-collapse:collapse;
+    background:white;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    border-radius:24px;
+    overflow:hidden;
 }
 
-tr:nth-child(even){
-    background:#d9dde2;
+thead{
+    background:#bcc7d1;
 }
 
-tr:nth-child(odd){
-    background:#eef2f5;
+th{
+    padding:14px 8px;
+    color:#2a2a2a;
+    font-size:18px;
+    font-weight:600;
+}
+
+tbody tr:nth-child(odd){
+    background:#dbe3ea;
+}
+
+tbody tr:nth-child(even){
+    background:#cad4de;
+}
+
+tbody tr{
+    border-bottom:1px solid #b3bcc5;
 }
 
 td{
-    color:black;
-    padding:12px;
-    font-size:24px;
+    padding:18px 10px;
+    color:#000;
+    vertical-align:middle;
 }
+
+/* PIANETI */
 
 .pianeta{
-    width:40%;
+    white-space:nowrap;
+    width:220px;
+    font-size:22px;
+    font-weight:400;
 }
+
+.simbolo-pianeta{
+    display:inline-block;
+    width:42px;
+    text-align:center;
+    font-size:42px;
+    font-weight:bold;
+}
+
+/* COLORI PIANETI */
+
+.pianeta-Sole{ color:#ffd54f; }
+.pianeta-Luna{ color:#8e5cff; }
+.pianeta-Mercurio{ color:#c7f5ff; }
+.pianeta-Venere{ color:#65f0c5; }
+.pianeta-Marte{ color:#ff5252; }
+.pianeta-Giove{ color:#ffb347; }
+.pianeta-Saturno{ color:#c69c6d; }
+.pianeta-Urano{ color:#4db8ff; }
+.pianeta-Nettuno{ color:#ff8ac6; }
+.pianeta-Plutone{ color:#ff6666; }
+
+/* GRADI */
 
 .grado{
-    width:25%;
     text-align:center;
+    width:110px;
+    font-size:22px;
+    font-weight:400;
 }
 
+/* SEGNI */
+
 .segno{
-    width:35%;
     text-align:center;
-    font-size:30px;
+    width:90px;
 }
-.velocita{
+
+.simbolo-segno{
+    display:inline-block;
+    width:42px;
     text-align:center;
+    font-size:42px;
+    font-weight:bold;
+}
+
+/* COLORI SEGNI */
+
+.segno-0{ color:#ff5252; }   /* Ariete - rosso */
+.segno-1{ color:#8bc34a; }   /* Toro - verde */
+.segno-2{ color:#ffb347; }   /* Gemelli - arancione */
+.segno-3{ color:#4fc3f7; }   /* Cancro - azzurro */
+.segno-4{ color:#ff9800; }   /* Leone - arancio scuro */
+.segno-5{ color:#66bb6a; }   /* Vergine - verde smeraldo */
+.segno-6{ color:#ba68c8; }   /* Bilancia - lilla */
+.segno-7{ color:#e91e63; }   /* Scorpione - fucsia */
+.segno-8{ color:#ff7043; }   /* Sagittario - corallo */
+.segno-9{ color:#795548; }   /* Capricorno - marrone */
+.segno-10{ color:#29b6f6; }  /* Acquario - blu cielo */
+.segno-11{ color:#26c6da; }  /* Pesci - turchese */
+
+/* VELOCITA */
+
+.velocita{
+    text-align:right;
+    width:110px;
+    white-space:nowrap;
+    font-size:22px;
+    font-weight:400;
+}
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+    body{
+        padding:12px;
+    }
+
+    h1{
+        font-size:38px;
+        padding:18px;
+    }
+
+    .pianeta{
+        font-size:20px;
+    }
+
+    .simbolo-pianeta{
+        width:34px;
+        font-size:42px;
+    }
+
+    .grado{
+        font-size:20px;
+    }
+
+    .simbolo-segno{
+        font-size:42px;
+    }
+
+    .velocita{
+        font-size:20px;
+    }
 }

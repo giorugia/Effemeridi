@@ -1,5 +1,3 @@
-const oggi = new Date();
-
 const pianetiReali = [
   ["☉", "Sole", "SUN"],
   ["☽", "Luna", "MOON"],
@@ -14,44 +12,107 @@ const pianetiReali = [
 ];
 
 const segni = [
-  "♈","♉","♊","♋","♌","♍",
-  "♎","♏","♐","♑","♒","♓"
+  "♈︎", // Ariete
+  "♉︎", // Toro
+  "♊︎", // Gemelli
+  "♋︎", // Cancro
+  "♌︎", // Leone
+  "♍︎", // Vergine
+  "♎︎", // Bilancia
+  "♏︎", // Scorpione
+  "♐︎", // Sagittario
+  "♑︎", // Capricorno
+  "♒︎", // Acquario
+  "♓︎"  // Pesci
 ];
 
 const corpo = document.getElementById("corpo-tabella");
 
-corpo.innerHTML = "";
+function aggiornaEffemeridi() {
+console.log("Aggiornamento:", new Date().toLocaleTimeString());
+  const oggi = new Date();
 
-pianetiReali.forEach(p => {
+  corpo.innerHTML = "";
 
-  let lon;
+  pianetiReali.forEach(p => {
 
-  if (p[2] === "SUN") {
-    lon = Astronomy.SunPosition(oggi).elon;
-  }
-  else if (p[2] === "MOON") {
-    lon = Astronomy.EclipticGeoMoon(oggi).lon;
-  }
-  else {
-    lon = Astronomy.EclipticLongitude(p[2], oggi);
-  }
+    let lon;
 
-  const indiceSegno = Math.floor(lon / 30);
+    if (p[2] === "SUN") {
+      lon = Astronomy.SunPosition(oggi).elon;
+    }
+    else if (p[2] === "MOON") {
+      lon = Astronomy.EclipticGeoMoon(oggi).lon;
+    }
+    else {
+      lon = Astronomy.EclipticLongitude(p[2], oggi);
+    }
 
-  const gradoNelSegno = lon % 30;
+    const unOraDopo = new Date(
+      oggi.getTime() + 60 * 60 * 1000
+    );
 
-  const gradi = Math.floor(gradoNelSegno);
+    let lonDopo;
 
-  const minuti = Math.floor(
-    (gradoNelSegno - gradi) * 60
-  );
+    if (p[2] === "SUN") {
+      lonDopo = Astronomy.SunPosition(unOraDopo).elon;
+    }
+    else if (p[2] === "MOON") {
+      lonDopo = Astronomy.EclipticGeoMoon(unOraDopo).lon;
+    }
+    else {
+      lonDopo = Astronomy.EclipticLongitude(
+        p[2],
+        unOraDopo
+      );
+    }
 
-  corpo.innerHTML += `
-    <tr>
-      <td class="pianeta">${p[0]} ${p[1]}</td>
-      <td class="grado">${gradi}°${minuti}'</td>
-      <td class="segno">${segni[indiceSegno]}</td>
-      <td class="velocita">--</td>
-    </tr>
-  `;
-});
+    let velocita = lonDopo - lon;
+
+    if (velocita < -180) velocita += 360;
+    if (velocita > 180) velocita -= 360;
+
+    const retrogrado =
+      velocita < 0 ? " ℞" : "";
+
+    const indiceSegno =
+      Math.floor(lon / 30);
+
+    const gradoNelSegno =
+      lon % 30;
+
+    const gradi =
+      Math.floor(gradoNelSegno);
+
+    const minuti =
+      Math.floor(
+        (gradoNelSegno - gradi) * 60
+      );
+
+    corpo.innerHTML += `
+      <tr>
+<td class="pianeta">
+  <span class="simbolo-pianeta pianeta-${p[1]}">
+    ${p[0]}
+  </span>
+  ${p[1]}${retrogrado}
+</td>        <td class="grado">${gradi}°${minuti}'</td>
+       <td class="segno">
+  <span class="simbolo-segno segno-${indiceSegno}">
+    ${segni[indiceSegno]}
+  </span>
+</td>
+        <td class="velocita">
+        ${(velocita * 3600).toFixed(4)}"
+        </td>
+      </tr>
+    `;
+  });
+}
+
+aggiornaEffemeridi();
+
+setInterval(
+  aggiornaEffemeridi,
+  10000
+);
