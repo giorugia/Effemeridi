@@ -71,9 +71,9 @@ console.log("Aggiornamento:", new Date().toLocaleTimeString());
 
     if (velocita < -180) velocita += 360;
     if (velocita > 180) velocita -= 360;
-
+    console.log(p[1], velocita);
     const retrogrado =
-      velocita < 0 ? " ℞" : "";
+    velocita < 0 ? " ℞" : "";
 
     const indiceSegno =
       Math.floor(lon / 30);
